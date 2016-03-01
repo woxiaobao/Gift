@@ -13,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.web.dao.ModuleD;
@@ -35,6 +36,14 @@ public class RoleController {
 	@Resource(name = "moduleDao")
 	private ModuleD moduleDao;
 	
+	
+	@RequestMapping(value="/print")
+    @ResponseBody
+    public String print(){
+        String message = "Hello World, Spring MVC!";
+        System.out.println(message);
+        return message;
+    }
 	/**
 	 * 获取json
 	 * @param request
@@ -56,10 +65,14 @@ public class RoleController {
 			list.add(ro);
 		}
 		roleMap.put("items", list);
-		String json = JSON.toJSONString(roleMap,true); 
+		return toJSONData(request,roleMap);
+	}
+	
+	private String toJSONData(HttpServletRequest request,Map<String, List<?>> map){
+		String json = JSON.toJSONString(map,true); 
 		request.setAttribute("json", json);
-	    System.out.println(json);
 		return "/massege/toJson";
+		
 	}
 	
 	/**
