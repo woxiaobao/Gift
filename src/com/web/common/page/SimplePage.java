@@ -4,7 +4,6 @@ package com.web.common.page;
  * 简单分页类
  */
 public class SimplePage implements Paginable {
-	private static final long serialVersionUID = 1L;
 	public static final int DEF_COUNT = 20;
 
 	/**

@@ -1,7 +1,5 @@
 package com.web.hibernet;
 
-import static org.hibernate.EntityMode.POJO;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -43,7 +41,7 @@ public abstract class HibernateBaseDao<T, ID extends Serializable> extends
 	 *            是否锁定，使用LockMode.UPGRADE
 	 * @return 持久化对象
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	protected T get(ID id, boolean lock) {
 		T entity;
 		if (lock) {
@@ -97,7 +95,7 @@ public abstract class HibernateBaseDao<T, ID extends Serializable> extends
 	 *            数量可变的Criterion.
 	 */
 	@SuppressWarnings("unchecked")
-	protected List findByCriteria(Criterion... criterion) {
+	protected List<T> findByCriteria(Criterion... criterion) {
 		return createCriteria(criterion).list();
 	}
 
@@ -111,6 +109,7 @@ public abstract class HibernateBaseDao<T, ID extends Serializable> extends
 	public T updateByUpdater(Updater<T> updater) {
 		ClassMetadata cm = sessionFactory.getClassMetadata(getEntityClass());
 		T bean = updater.getBean();
+		@SuppressWarnings("deprecation")
 		T po = (T) getSession().get(getEntityClass(),
 				cm.getIdentifier(bean));
 		updaterCopyToPersistentObject(updater, po, cm);

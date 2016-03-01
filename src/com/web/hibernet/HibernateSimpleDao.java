@@ -11,6 +11,7 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.internal.CriteriaImpl;
+import org.hibernate.internal.CriteriaImpl.OrderEntry;
 import org.hibernate.transform.ResultTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,8 +44,7 @@ public abstract class HibernateSimpleDao {
 	 * @param values
 	 *            数量可变的参数
 	 */
-	@SuppressWarnings("unchecked")
-	protected List find(String hql, Object... values) {
+	protected List<?> find(String hql, Object... values) {
 		return createQuery(hql, values).list();
 	}
 
@@ -66,12 +66,11 @@ public abstract class HibernateSimpleDao {
 	 *            每页条数
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	protected Pagination find(Finder finder, int pageNo, int pageSize) {
 		int totalCount = countQueryResult(finder);
 		Pagination p = new Pagination(pageNo, pageSize, totalCount);
 		if (totalCount < 1) {
-			p.setList(new ArrayList());
+			p.setList(new ArrayList<Object>());
 			return p;
 		}
 		Query query = getSession().createQuery(finder.getOrigHql());
@@ -81,7 +80,7 @@ public abstract class HibernateSimpleDao {
 		if (finder.isCacheable()) {
 			query.setCacheable(true);
 		}
-		List list = query.list();
+		List<?> list = query.list();
 		p.setList(list);
 		return p;
 	}
@@ -96,10 +95,9 @@ public abstract class HibernateSimpleDao {
 	 * @param finder
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
-	protected List find(Finder finder) {
+	protected List<?> find(Finder finder) {
 		Query query = finder.createQuery(getSession());
-		List list = query.list();
+		List<?> list = query.list();
 		return list;
 	}
 
@@ -135,9 +133,9 @@ public abstract class HibernateSimpleDao {
 		ResultTransformer transformer = impl.getResultTransformer();
 		List<CriteriaImpl.OrderEntry> orderEntries;
 		try {
-			orderEntries = (List) MyBeanUtils
+			orderEntries = (List<OrderEntry>) MyBeanUtils
 					.getFieldValue(impl, ORDER_ENTRIES);
-			MyBeanUtils.setFieldValue(impl, ORDER_ENTRIES, new ArrayList());
+			MyBeanUtils.setFieldValue(impl, ORDER_ENTRIES, new ArrayList<Object>());
 		} catch (Exception e) {
 			throw new RuntimeException(
 					"cannot read/write 'orderEntries' from CriteriaImpl", e);
@@ -147,7 +145,7 @@ public abstract class HibernateSimpleDao {
 				.uniqueResult()).intValue();
 		Pagination p = new Pagination(pageNo, pageSize, totalCount);
 		if (totalCount < 1) {
-			p.setList(new ArrayList());
+			p.setList(new ArrayList<Object>());
 			return p;
 		}
 
@@ -192,11 +190,10 @@ public abstract class HibernateSimpleDao {
 		return ((Number) query.iterate().next()).intValue();
 	}
 	
-	@SuppressWarnings("unchecked")
 	private Pagination findByTotalCount(Finder finder, int pageNo, int pageSize,int totalCount) {
 		Pagination p = new Pagination(pageNo, pageSize, totalCount);
 		if (totalCount < 1) {
-			p.setList(new ArrayList());
+			p.setList(new ArrayList<Object>());
 			return p;
 		}
 		Query query = getSession().createQuery(finder.getOrigHql());
@@ -206,7 +203,7 @@ public abstract class HibernateSimpleDao {
 		if (finder.isCacheable()) {
 			query.setCacheable(true);
 		}
-		List list = query.list();
+		List<?> list = query.list();
 		p.setList(list);
 		return p;
 	}

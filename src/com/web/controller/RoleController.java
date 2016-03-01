@@ -44,6 +44,9 @@ public class RoleController {
 	public String json(HttpServletRequest request){
 		@SuppressWarnings("unchecked")
 		List<Role> roleList=(List<Role>) roleDao.getAll();
+		if(roleList.size()<1){
+			return null;
+		}
 		List<Role> list=new ArrayList<Role>();
 		Map<String,List<?>> roleMap=new HashMap<String,List<?>>();
 		for(Role r:roleList){

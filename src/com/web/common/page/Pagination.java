@@ -71,7 +71,7 @@ public class Pagination extends SimplePage implements java.io.Serializable,
 	 * 
 	 * @param list
 	 */
-	public void setList(List list) {
+	public void setList(List<?> list) {
 		this.list = list;
 	}
 }

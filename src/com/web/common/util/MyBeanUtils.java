@@ -64,12 +64,11 @@ public class MyBeanUtils {
 	/**
 	 * 循环向上转型,获取类的DeclaredField.
 	 */
-	@SuppressWarnings("unchecked")
-	protected static Field getDeclaredField(final Class clazz,
+	protected static Field getDeclaredField(final Class<?> clazz,
 			final String fieldName) {
 		Assert.notNull(clazz);
 		Assert.hasText(fieldName);
-		for (Class superClass = clazz; superClass != Object.class; superClass = superClass
+		for (Class<?> superClass = clazz; superClass != Object.class; superClass = superClass
 				.getSuperclass()) {
 			try {
 				return superClass.getDeclaredField(fieldName);
