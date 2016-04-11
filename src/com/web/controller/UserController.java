@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.web.dao.RoleD;
 import com.web.dao.UserD;
@@ -41,12 +45,16 @@ public class UserController {
 	 * @param request
 	 * @return
 	 */
-	
-	@RequestMapping("/testAjax")
-	public String testAjax(HttpServletRequest request){
-		System.out.println(request.getParameter("id"));
-		System.out.println(request.getParameter("data"));
-		return "/massege/success";
+	@ResponseBody
+	@RequestMapping(value="/get/${id}", method = RequestMethod.GET)
+	public User  get(@PathVariable int id){
+		//System.out.println(request.getParameter("id"));
+		//System.out.println(request.getParameter("data"));
+//		Page page=getPageAll("1");//默认到第一页
+//		List<User> userList=(List<User>)userDao.getAll(page);
+//		return new ModelAndView("success");
+		//User user=(User) userDao.getIdObj(id);
+		return (User) userDao.getIdObj(id+"");
 	}
 	/**
 	 * 到列表页

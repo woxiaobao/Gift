@@ -44,7 +44,7 @@
                     
                     <div class="form-group">
                       <label for="">角色</label>
-                      <select id="roleid" class="form-control" ng="false"  name="roleid" onClick="toJson()">
+                      <select id="roleid" class="form-control" ng="false"  name="roleid" >
                       	<option value="${user.role.id }" selected=true>${user.role.roleName }</option>
 					  </select>
                     </div>
@@ -72,6 +72,12 @@
 				
 				<script type="text/javascript">
               var rid="${user.role.id }";
+              
+             
+              
+              $(function(){
+            	  toJson();
+              })
               function toJson(){
           		//alert(id);
           		var ng=$("#roleid");

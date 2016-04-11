@@ -46,7 +46,8 @@
 <link href="${pageContext.request.contextPath}/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"
 	rel="stylesheet" type="text/css" />
 
-	
+<link href="${pageContext.request.contextPath}/js/jquery.editable-select.min.css"
+	rel="stylesheet" type="text/css" />	
 
 
 
@@ -1216,6 +1217,7 @@
 	<!-- AdminLTE for demo purposes -->
 	<script src="${pageContext.request.contextPath}/js/dist/js/demo.js" type="text/javascript"></script>
 	
+	<script src="${pageContext.request.contextPath}/js/jquery.editable-select.min.js" type="text/javascript"></script>
 	<!-- 全局js -->
 	<script src="${pageContext.request.contextPath}/js/application.js" type="text/javascript"></script>
 	
