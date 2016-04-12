@@ -4,6 +4,21 @@
  * @version 1.0
  */
 
+	function ceshi(){
+		$.ajax({
+            cache: false,//是否读取缓存
+            type: "POST",
+            url:"/Gift/restful/hi",
+            data:{},
+            async: true,
+            //dataType:"html",
+            success: function(data) {
+                console.log(data);
+            },error: function(error) {
+                alert("500-发生错误！");
+            }
+        });
+	}
 
 	//全局变量 设定定当前位置 如：用户列表页
 	var $active=$("#homePath");

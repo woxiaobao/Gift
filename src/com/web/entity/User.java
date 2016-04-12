@@ -173,5 +173,18 @@ public class User implements Serializable{
 	public void setIcon(String icon) {
 		this.icon = icon;
 	}
+
+	@Override
+	public String toString() {
+		return "{\"id\":\"" + id + "\", \"userName\":\"" + userName
+				+ "\", \"password\":\"" + password + "\", \"email\":\"" + email
+				+ "\", \"phone\":\"" + phone + "\", \"nickname\":\"" + nickname
+				+ "\", \"status\":\"" + status + "\", \"role\":\"" + role
+				+ "\", \"enabled\":\"" + enabled + "\", \"dateCreated\":\""
+				+ dateCreated + "\", \"lastUpdated\":\"" + lastUpdated
+				+ "\", \"lastLoginTime\":\"" + lastLoginTime
+				+ "\", \"icon\":\"" + icon + "\"}";
+	}
+	
 	
 }

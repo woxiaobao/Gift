@@ -15,6 +15,7 @@
 			<!--  
 			<button class="btn bg-purple margin" onClick="toAdd('user')">新增</button>
 			-->
+			<button class="btn btn-default pull-right" onClick="ceshi()"><i class="fa fa-plus"></i> 测试</button>
 			<button class="btn btn-default pull-right" onClick="toAdd('user')"><i class="fa fa-plus"></i> 新增</button>
 		</div>
 		<!-- /.box-header -->
