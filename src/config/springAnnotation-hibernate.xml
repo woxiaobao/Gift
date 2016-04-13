@@ -34,6 +34,9 @@
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	
+	
+	
 	<!--
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
@@ -56,5 +59,8 @@
 		</property>
 	</bean>
 	 
+	 
+	 
+	
 	
 </beans>

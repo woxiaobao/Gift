@@ -42,7 +42,12 @@ public class RESTController {
 	
 	
 	
-	// URI:	http://localhost:8089/Gift/restful/hi
+	/**
+	 * 这个使用配置中方式返回string or json
+	 * URI:	http://localhost:8089/Gift/restful/hi
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/hi", produces = "text/plain;charset=UTF-8")
 	public @ResponseBody String hello(HttpServletRequest request) {
 		//logger.info("测试hi");
@@ -57,7 +62,12 @@ public class RESTController {
 		return "{\"msg\":\"you say:'" + msg + "'\"}";
 	}
 	
-	//POST
+	/**
+	 * 这个方法使用工具类ResponseUtils
+	 * 使用流的形式返回json
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/info", method = RequestMethod.POST)
 	public void addBook(HttpServletRequest request, HttpServletResponse response) {
 		JSONObject jsonObject = new JSONObject();
