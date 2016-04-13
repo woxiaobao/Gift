@@ -28,7 +28,7 @@ public class MyFileUtils {
 	public static String getTime() {
     	long mts = System.currentTimeMillis();
     	
-    	long time = mts/1000;
+    	//long time = mts/1000;
     	
     	Calendar cal = new GregorianCalendar();
     	cal.setTimeInMillis(mts);

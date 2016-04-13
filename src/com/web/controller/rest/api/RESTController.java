@@ -7,7 +7,10 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.web.common.web.utils.RequestUtils;
+import com.web.common.web.utils.ResponseUtils;
 import com.web.dao.RoleD;
 import com.web.dao.UserD;
 import com.web.entity.Role;
@@ -25,6 +30,7 @@ import com.web.service.ObjService;
 @Controller
 @RequestMapping("/restful")
 public class RESTController {
+	public static Logger LOG = LogManager.getLogger(RESTController.class);
 	
 	@Resource(name = "userService")
 	private ObjService userService;
@@ -38,8 +44,10 @@ public class RESTController {
 	
 	// URI:	http://localhost:8089/Gift/restful/hi
 	@RequestMapping(value = "/hi", produces = "text/plain;charset=UTF-8")
-	public @ResponseBody String hello() {
+	public @ResponseBody String hello(HttpServletRequest request) {
 		//logger.info("测试hi");
+		String ip = RequestUtils.getIpAddr(request);
+		LOG.info("RESTController request ip : "+ip);
 		return "Hello World !!!";
 	}
 	
@@ -51,10 +59,11 @@ public class RESTController {
 	
 	//POST
 	@RequestMapping(value = "/info", method = RequestMethod.POST)
-	public @ResponseBody Object addBook( ) {
+	public void addBook(HttpServletRequest request, HttpServletResponse response) {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("msg", "添加信息成功！");
-		return jsonObject;
+		ResponseUtils.renderJson(response, jsonObject.toJSONString());
+//		return jsonObject;
 	}
 		
 	/**

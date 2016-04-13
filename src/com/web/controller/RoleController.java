@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alibaba.fastjson.JSON;
-import com.web.common.util.GlobalUtil;
 import com.web.dao.ModuleD;
 import com.web.dao.RoleD;
 import com.web.entity.Module;
@@ -70,7 +69,7 @@ public class RoleController {
 	
 	private String toJSONData(HttpServletRequest request,String json){
 		request.setAttribute("json", json);
-		return GlobalUtil.RENDER;
+		return "/massege/toJson";
 		
 	}
 	
