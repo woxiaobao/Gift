@@ -58,7 +58,44 @@ public class RequestUtils {
 			return null;
 		}
 	}
-
+	
+	/**
+	 * 打印log请求的参数信息
+	 * @param request
+	 */
+	public static String printParams(HttpServletRequest request){
+		Map<String, String[]> map = request.getParameterMap();
+		StringBuffer sb = new StringBuffer();
+		sb.append("[");
+		int len;
+		int k = 1;
+		for (Map.Entry<String, String[]> entry : map.entrySet()) {
+			len = entry.getValue().length;
+			if (len == 1) {
+				sb.append(entry.getKey() + ":" + entry.getValue()[0]+",");
+				if(k == map.entrySet().size()){
+					sb.append(entry.getKey() + ":" + entry.getValue()[0]+"]");
+				}
+			} else if (len > 1) {
+				sb.append(entry.getKey() + ":[");
+				for (int i = 0; i < entry.getValue().length; i++) {
+					sb.append(entry.getValue()[i] + ",");
+					if(i == len-1){
+						sb.append(entry.getValue()[i] + "],");
+					}
+				}
+				
+			}
+			k++;
+		}
+		return sb.toString();
+	}
+	
+	/**
+	 * 把请求的参数封装成 Map<String, Object>
+	 * @param request
+	 * @return
+	 */
 	public static Map<String, Object> getQueryParams(HttpServletRequest request) {
 		Map<String, String[]> map;
 		if (request.getMethod().equalsIgnoreCase(POST)) {

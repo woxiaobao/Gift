@@ -7,4 +7,6 @@ springmvc 实现CORS跨域，在/Gift/src/com/web/filter/SimpleCORSFilter.java
 
 /Gift/src/com/web/controller/rest/api/RESTController.java  实现springmvc restful风格
 
+/Gift/src/com/web/controller/sysLog/LogService.java 是AOP切面类，实现拦截
+
 com.web.hibernet通用的数据访问层，使用hql语句，在DAO.txt文件中有实例。

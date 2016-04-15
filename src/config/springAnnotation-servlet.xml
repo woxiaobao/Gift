@@ -13,8 +13,7 @@
       http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
       http://www.springframework.org/schema/mvc  
       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
-     <!-- 注解扫描包-->
-	<context:component-scan base-package="com.web.controller" />
+     
 	
 	 <!-- 注解扫描包 使用这个配置，AOP生效但是不执行目标方法
 	<context:component-scan base-package="com.web">
@@ -22,10 +21,11 @@
 		<context:include-filter type="regex" expression="com.web.common.sysLog"/>
 	</context:component-scan>
 	-->
-	
 	<!-- 开启注解 -->
 	<mvc:annotation-driven/>
 	
+	<!-- 注解扫描包-->
+	<context:component-scan base-package="com.web.controller" />
 	
 	<!--
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
@@ -34,10 +34,15 @@
 	 
 	 
 	 <!-- 启动对@AspectJ注解的支持 -->
+	 <!-- 
+	 proxy-target-class等于true是强制使用cglib代理，
+	 proxy-target-class默认是false，如果你的类实现了接口 就走JDK代理，
+	   如果没有，走cglib代理
+	-->
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
 	
-	
-	
+	<bean id="logService" class="com.web.controller.sysLog.LogService"/>
+	 
 	
 	<!-- 输出对象转String支持 -->
 	<bean id="stringConverter"
@@ -48,7 +53,7 @@
 			</list>
 		</property>
 	</bean>
-
+	 
 	<!-- 输出对象转JSON支持 -->
 	<bean id="jsonConverter"
 		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
